@@ -18,22 +18,39 @@ public class GameEngine implements Engine, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode(); // get integer code of the key pressed
-        if(code == KeyEvent.VK_Z) { // KeyEvent.VK_xxx is  the key code for key xxx
+        int code = e.getKeyCode();
+        if(code == KeyEvent.VK_Z) {
+            hero.isWalking = true;
             hero.setDirection(Direction.NORTH);
         }
         if(code == KeyEvent.VK_S) {
+            hero.isWalking = true;
             hero.setDirection(Direction.SOUTH);
         }
         if(code == KeyEvent.VK_Q) {
+            hero.isWalking = true;
             hero.setDirection(Direction.WEST);
         }
         if(code == KeyEvent.VK_D) {
+            hero.isWalking = true;
             hero.setDirection(Direction.EAST);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        int code = e.getKeyCode();
+        if(code == KeyEvent.VK_Z) {
+            hero.isWalking = false;
+        }
+        if(code == KeyEvent.VK_S) {
+            hero.isWalking = false;
+        }
+        if(code == KeyEvent.VK_Q) {
+            hero.isWalking = false;
+        }
+        if(code == KeyEvent.VK_D) {
+            hero.isWalking = false;
+        }
     }
 }

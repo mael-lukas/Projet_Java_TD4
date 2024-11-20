@@ -3,7 +3,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class DynamicSprite extends SolidSprite {
-    private boolean isWalking = true;
+    public boolean isWalking = false;
     private double speed = 5;
     private final int spriteSheetNumberOfColumn = 10;
     private int timeBetweenFrame = 100;
@@ -61,8 +61,10 @@ public class DynamicSprite extends SolidSprite {
     }
 
     public void moveIfPossible(ArrayList<Sprite> environment) {
-        if(isWalkingPossible(environment)) {
-            move();
+        if(isWalking == true) {
+            if(isWalkingPossible(environment)) {
+                move();
+            }
         }
     }
 
