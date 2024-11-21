@@ -16,7 +16,7 @@ public class Main {
         displayZoneFrame = new JFrame();
         displayZoneFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         displayZoneFrame.setTitle("TD4 dungeon crawler");
-        displayZoneFrame.setSize(384,600);
+        displayZoneFrame.setSize(384,610);
         displayZoneFrame.setLocationRelativeTo(null);
         displayZoneFrame.setResizable(false);
 
@@ -37,7 +37,7 @@ public class Main {
 
         displayZoneFrame.getContentPane().add(renderEngine);
 
-        Playground level = new Playground("./data/level1.txt");
+        Playground level = new Playground("./data/level1.txt",6,9);
         renderEngine.addToRenderList(level.getSpriteList());
         renderEngine.addToRenderList(hero);
         physicsEngine.addToMovingSpriteList(hero);
@@ -45,7 +45,6 @@ public class Main {
 
         displayZoneFrame.addKeyListener(gameEngine);
         displayZoneFrame.setVisible(true);
-
     }
 
     public static void main(String[] args) throws Exception {

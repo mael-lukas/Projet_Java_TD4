@@ -8,7 +8,14 @@ import java.util.ArrayList;
 
 public class Playground {
     private ArrayList<Sprite> environment = new ArrayList<>();
-    public Playground (String pathName){
+    private String mapPathName;
+    public int maxMapCol;
+    public int maxMapRow;
+
+    public Playground (String pathName, int maxMapCol, int maxMapRow){
+        this.mapPathName = pathName;
+        this.maxMapCol = maxMapCol;
+        this.maxMapRow = maxMapRow;
         try{
             final Image imageTree = ImageIO.read(new File("./img/tree.png"));
             final Image imageGrass = ImageIO.read(new File("./img/grass.png"));
@@ -48,6 +55,7 @@ public class Playground {
             e.printStackTrace();
         }
     }
+
     public ArrayList<Sprite> getSolidSpriteList(){
         ArrayList <Sprite> solidSpriteArrayList = new ArrayList<>();
         for (Sprite sprite : environment){
