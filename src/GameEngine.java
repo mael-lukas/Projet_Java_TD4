@@ -2,10 +2,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameEngine implements Engine, KeyListener {
-    private final DynamicSprite hero;
+    public boolean upPressed, downPressed, leftPressed, rightPressed;
 
-    public GameEngine(DynamicSprite hero) {
-        this.hero = hero;
+    public GameEngine() {
     }
 
     @Override
@@ -20,20 +19,16 @@ public class GameEngine implements Engine, KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_Z) {
-            hero.isWalking = true;
-            hero.setDirection(Direction.NORTH);
+            upPressed = true;
         }
         if(code == KeyEvent.VK_S) {
-            hero.isWalking = true;
-            hero.setDirection(Direction.SOUTH);
+            downPressed = true;
         }
         if(code == KeyEvent.VK_Q) {
-            hero.isWalking = true;
-            hero.setDirection(Direction.WEST);
+            leftPressed = true;
         }
         if(code == KeyEvent.VK_D) {
-            hero.isWalking = true;
-            hero.setDirection(Direction.EAST);
+            rightPressed = true;
         }
     }
 
@@ -41,16 +36,16 @@ public class GameEngine implements Engine, KeyListener {
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_Z) {
-            hero.isWalking = false;
+            upPressed = false;
         }
         if(code == KeyEvent.VK_S) {
-            hero.isWalking = false;
+            downPressed = false;
         }
         if(code == KeyEvent.VK_Q) {
-            hero.isWalking = false;
+            leftPressed = false;
         }
         if(code == KeyEvent.VK_D) {
-            hero.isWalking = false;
+            rightPressed = false;
         }
     }
 }
