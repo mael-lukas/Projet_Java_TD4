@@ -3,7 +3,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class DynamicSprite extends SolidSprite {
-    private double speed = 5;
+    private double speed = 4;
     private final int spriteSheetNumberOfColumn = 10;
     private int timeBetweenFrame = 100;
     private int spriteCounter = 0;

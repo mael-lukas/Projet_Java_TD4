@@ -56,6 +56,7 @@ public class Playground {
         }
     }
 
+
     public ArrayList<Sprite> getSolidSpriteList(){
         ArrayList <Sprite> solidSpriteArrayList = new ArrayList<>();
         for (Sprite sprite : environment){

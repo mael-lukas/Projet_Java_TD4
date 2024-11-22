@@ -20,13 +20,14 @@ public class Main {
         displayZoneFrame.setLocationRelativeTo(null);
         displayZoneFrame.setResizable(false);
 
+        PlaygroundManager pgManager = new PlaygroundManager();
         GameEngine gameEngine = new GameEngine();
         DynamicSprite hero = new DynamicSprite(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),80,300,48,50,gameEngine);
         hero.setHitbox(10,18,27,28);
 
-        RenderEngine renderEngine = new RenderEngine();
-        PhysicsEngine physicsEngine = new PhysicsEngine();
-        int delay = (int) 1500/fps; // 1 sec (in millisec) divided by fps : 16.666 millisec
+        RenderEngine renderEngine = new RenderEngine(pgManager);
+        PhysicsEngine physicsEngine = new PhysicsEngine(pgManager);
+        int delay = (int) 1000/fps; // 1 sec (in millisec) divided by fps : 16.666 millisec
 
         Timer renderTimer = new Timer(delay,(time)->renderEngine.update());
         //Timer gameTimer = new Timer(delay,(time)->gameEngine.update());
@@ -37,11 +38,14 @@ public class Main {
 
         displayZoneFrame.getContentPane().add(renderEngine);
 
-        Playground level = new Playground("./data/level1.txt",6,9);
-        renderEngine.addToRenderList(level.getSpriteList());
-        renderEngine.addToRenderList(hero);
+        //Playground level = new Playground("./data/level1.txt",6,9);
+        //renderEngine.addToRenderList(level.getSpriteList());
+        for (int i = 0; i < pgManager.playgroundList.size(); i++) {
+            renderEngine.addToRenderList(hero,i);
+        }
+        //renderEngine.addToRenderList(hero,0);
         physicsEngine.addToMovingSpriteList(hero);
-        physicsEngine.setEnvironment(level.getSolidSpriteList());
+        //physicsEngine.setEnvironment(pgManager.playgroundList.get(0).getSolidSpriteList());
 
         displayZoneFrame.addKeyListener(gameEngine);
         displayZoneFrame.setVisible(true);
