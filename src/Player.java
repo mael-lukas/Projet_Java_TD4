@@ -3,7 +3,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class Player extends DynamicSprite {
-    public int speed = 5;
+    public int speed = 4;
     private final int spriteSheetNumberOfColumn = 10;
     public String direction;
     private int spriteCounter = 0;
