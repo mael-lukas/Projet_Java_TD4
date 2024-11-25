@@ -2,7 +2,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameEngine implements Engine, KeyListener {
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, running;
 
     public GameEngine() {
     }
@@ -30,6 +30,9 @@ public class GameEngine implements Engine, KeyListener {
         if(code == KeyEvent.VK_D) {
             rightPressed = true;
         }
+        if(code == KeyEvent.VK_SHIFT) {
+            running = true;
+        }
     }
 
     @Override
@@ -46,6 +49,9 @@ public class GameEngine implements Engine, KeyListener {
         }
         if(code == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+        if(code == KeyEvent.VK_SHIFT) {
+            running = false;
         }
     }
 }

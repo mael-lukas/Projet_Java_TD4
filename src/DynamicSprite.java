@@ -60,6 +60,24 @@ public class DynamicSprite extends SolidSprite {
     }
 
     public void checkForInteraction(ArrayList<Sprite> environment) {
+        double futureX = this.x;
+        double futureY = this.y;
+        switch (direction) {
+            case "north":
+                futureY -= speed;
+                break;
+            case "south":
+                futureY += speed;
+                break;
+            case "east":
+                futureX += speed;
+                break;
+            case "west":
+                futureX -= speed;
+                break;
+        }
+        this.hitbox.x = this.hitboxXOffset + futureX;
+        this.hitbox.y = this.hitboxYOffset + futureY;
         for(Sprite sprite : environment) {
             if ((sprite instanceof InteractiveSprite) && (((InteractiveSprite)sprite).intersect(this.hitbox))) {
                 String name = ((InteractiveSprite)sprite).getName();
@@ -105,8 +123,8 @@ public class DynamicSprite extends SolidSprite {
             }
             if(checkForCollision(environment)) {
                 move();
+                checkForInteraction(environment);
             }
-            checkForInteraction(environment);
             spriteCounter++;
             if(spriteCounter > 5) {
                 spriteNumber = (spriteNumber + 1) % spriteSheetNumberOfColumn;
