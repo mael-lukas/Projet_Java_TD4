@@ -22,8 +22,7 @@ public class MainGame {
         //on gère les Engines + le héro
         PlaygroundManager pgManager = new PlaygroundManager();
         gameEngine = new GameEngine();
-        DynamicSprite hero = new DynamicSprite(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),200, 300,  48, 50,gameEngine,pgManager);
-        hero.setHitbox(10,18,27,28);
+        Player hero = new Player(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),200, 300,  48, 50,gameEngine,pgManager);
         renderEngine = new RenderEngine(pgManager);
         physicEngine = new PhysicsEngine(pgManager);
 
@@ -46,7 +45,7 @@ public class MainGame {
 
         //JLabel titleLabel = new JLabel("Écran Titre", SwingConstants.CENTER);
         //titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-       // titleScreen.add(titleLabel, BorderLayout.WEST);
+        //titleScreen.add(titleLabel, BorderLayout.WEST);
 
         JButton startButton = new JButton("Start");
         titleScreen.add(startButton, BorderLayout.CENTER);

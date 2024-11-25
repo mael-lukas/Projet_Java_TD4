@@ -2,22 +2,24 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
-public class DynamicSprite extends SolidSprite {
-    private double speed = 4;
+public class Player extends DynamicSprite {
+    public int speed = 4;
     private final int spriteSheetNumberOfColumn = 10;
+    public String direction;
     private int spriteCounter = 0;
     private int spriteNumber = 1;
-    private String direction;
     private Rectangle2D.Double hitbox;
     private int hitboxXOffset = 0;
     private int hitboxYOffset = 0;
-    GameEngine ge;
+    PlaygroundManager pgManager;
 
-    public DynamicSprite(Image image, double x, double y, double width, double height,GameEngine ge) {
-        super(image, x, y, width, height);
+    public Player(Image image, double x, double y, double width, double height, GameEngine ge, PlaygroundManager pgManager) {
+        super(image, x, y, width, height, ge);
         this.direction = "south";
         this.ge = ge;
+        this.pgManager = pgManager;
         this.hitbox = new Rectangle2D.Double(this.x, this.y, this.width, this.height);
+        setHitbox(10,18,27,28);
     }
 
     public void setHitbox(int xOffset,int yOffset,int width,int height) {
@@ -56,24 +58,74 @@ public class DynamicSprite extends SolidSprite {
         return true;
     }
 
-
-    public void move() {
-        switch(direction) {
+    public void checkForInteraction(ArrayList<Sprite> environment) {
+        double futureX = this.x;
+        double futureY = this.y;
+        switch (direction) {
             case "north":
-                this.y -= speed;
+                futureY -= speed;
                 break;
             case "south":
-                this.y += speed;
+                futureY += speed;
                 break;
             case "east":
-                this.x += speed;
+                futureX += speed;
                 break;
             case "west":
-                this.x -= speed;
+                futureX -= speed;
                 break;
+        }
+        this.hitbox.x = this.hitboxXOffset + futureX;
+        this.hitbox.y = this.hitboxYOffset + futureY;
+        for(Sprite sprite : environment) {
+            if ((sprite instanceof InteractiveSprite) && (((InteractiveSprite)sprite).intersect(this.hitbox))) {
+                String name = ((InteractiveSprite)sprite).getName();
+                switch(name) {
+                    case "door":
+                        this.pgManager.setCurrentPlayground((this.pgManager.currentPlayground + 1)%2);
+                        break;
+                }
+            }
         }
     }
 
+    @Override
+    public void move() {
+        if (ge.running == true) {
+            switch(direction) {
+                case "north":
+                    this.y -= speed + 1;
+                    break;
+                case "south":
+                    this.y += speed + 1;
+                    break;
+                case "east":
+                    this.x += speed + 1;
+                    break;
+                case "west":
+                    this.x -= speed + 1;
+                    break;
+            }
+        }
+        else {
+            switch(direction) {
+                case "north":
+                    this.y -= speed;
+                    break;
+                case "south":
+                    this.y += speed;
+                    break;
+                case "east":
+                    this.x += speed;
+                    break;
+                case "west":
+                    this.x -= speed;
+                    break;
+            }
+        }
+    }
+
+    @Override
     public void moveIfPossible(ArrayList<Sprite> environment) {
         if(ge.upPressed || ge.downPressed || ge.leftPressed || ge.rightPressed) {
             if(ge.upPressed) {
@@ -90,7 +142,7 @@ public class DynamicSprite extends SolidSprite {
             }
             if(checkForCollision(environment)) {
                 move();
-                //checkForInteraction(environment);
+                checkForInteraction(environment);
             }
             spriteCounter++;
             if(spriteCounter > 5) {
@@ -99,7 +151,6 @@ public class DynamicSprite extends SolidSprite {
             }
         }
     }
-
     @Override
     public void draw(Graphics g) {
         int attitude = 0;
