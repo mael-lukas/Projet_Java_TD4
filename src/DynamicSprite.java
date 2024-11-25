@@ -32,7 +32,7 @@ public class DynamicSprite extends SolidSprite {
         this.hitbox.height = height;
     }
 
-    private boolean isWalkingPossible(ArrayList<Sprite> environment) {
+    private boolean checkForCollision(ArrayList<Sprite> environment) {
         double futureX = this.x;
         double futureY = this.y;
         switch (direction) {
@@ -65,7 +65,6 @@ public class DynamicSprite extends SolidSprite {
                 String name = ((InteractiveSprite)sprite).getName();
                 switch(name) {
                     case "door":
-                        //System.out.println("You touched a door");
                         this.pgManager.setCurrentPlayground((this.pgManager.currentPlayground + 1)%2);
                         break;
                 }
@@ -104,7 +103,7 @@ public class DynamicSprite extends SolidSprite {
             if(ge.rightPressed) {
                 direction = "east";
             }
-            if(isWalkingPossible(environment)) {
+            if(checkForCollision(environment)) {
                 move();
             }
             checkForInteraction(environment);
