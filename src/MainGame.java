@@ -10,7 +10,7 @@ public class MainGame {
     RenderEngine renderEngine;
     GameEngine gameEngine;
     PhysicsEngine physicEngine;
-    int fps = 50;
+    int fps = 60;
 
     public MainGame() throws IOException {
         // Créer la JFrame

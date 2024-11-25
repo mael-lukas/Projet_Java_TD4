@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Main {
-    JFrame displayZoneFrame;
-    RenderEngine renderEngine;
-    int fps = 60;
 
     public Main() throws Exception {
 //        displayZoneFrame = new JFrame();

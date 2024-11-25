@@ -8,8 +8,7 @@ public class PlaygroundManager {
     public PlaygroundManager() {
         this.playgroundList = new ArrayList<Playground>();
         playgroundList.add(0,new Playground("./data/level1.txt", 6, 9));
-
-
+        playgroundList.add(1,new Playground("./data/level2.txt",6,9));
     }
 
     public void setCurrentPlayground(int currentPlayground) {
