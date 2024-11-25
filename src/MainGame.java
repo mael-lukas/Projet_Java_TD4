@@ -22,7 +22,7 @@ public class MainGame {
         //on gère les Engines + le héro
         PlaygroundManager pgManager = new PlaygroundManager();
         gameEngine = new GameEngine();
-        DynamicSprite hero = new DynamicSprite(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),200, 300,  48, 50,gameEngine);
+        DynamicSprite hero = new DynamicSprite(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),200, 300,  48, 50,gameEngine,pgManager);
         hero.setHitbox(10,18,27,28);
         renderEngine = new RenderEngine(pgManager);
         physicEngine = new PhysicsEngine(pgManager);

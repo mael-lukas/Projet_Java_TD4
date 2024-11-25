@@ -13,10 +13,12 @@ public class DynamicSprite extends SolidSprite {
     private Rectangle2D.Double hitbox;
     private int hitboxXOffset = 0;
     private int hitboxYOffset = 0;
+    PlaygroundManager pgManager;
 
-    public DynamicSprite(Image image, double x, double y, double width, double height, GameEngine ge) {
+    public DynamicSprite(Image image, double x, double y, double width, double height, GameEngine ge, PlaygroundManager pgManager) {
         super(image, x, y, width, height);
         this.ge = ge;
+        this.pgManager = pgManager;
         this.direction = "south";
         this.hitbox = new Rectangle2D.Double(this.x, this.y, this.width, this.height);
     }
@@ -57,6 +59,20 @@ public class DynamicSprite extends SolidSprite {
         return true;
     }
 
+    public void checkForInteraction(ArrayList<Sprite> environment) {
+        for(Sprite sprite : environment) {
+            if ((sprite instanceof InteractiveSprite) && (((InteractiveSprite)sprite).intersect(this.hitbox))) {
+                String name = ((InteractiveSprite)sprite).getName();
+                switch(name) {
+                    case "door":
+                        //System.out.println("You touched a door");
+                        this.pgManager.setCurrentPlayground((this.pgManager.currentPlayground + 1)%2);
+                        break;
+                }
+            }
+        }
+    }
+
     private void move() {
         switch(direction) {
             case "north":
@@ -91,6 +107,7 @@ public class DynamicSprite extends SolidSprite {
             if(isWalkingPossible(environment)) {
                 move();
             }
+            checkForInteraction(environment);
             spriteCounter++;
             if(spriteCounter > 5) {
                 spriteNumber = (spriteNumber + 1) % spriteSheetNumberOfColumn;

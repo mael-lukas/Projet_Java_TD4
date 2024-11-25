@@ -9,7 +9,9 @@ public class PhysicsEngine implements Engine {
         this.pgManager = pgManager;
         this.environments = new ArrayList<ArrayList<Sprite>>();
         for (Playground pg : (pgManager.playgroundList)){
-            environments.add(pg.getSolidSpriteList());
+            ArrayList<Sprite> temp = pg.getSolidSpriteList();
+            temp.addAll(pg.getInteractiveSpriteList());
+            environments.add(temp);
         }
     }
 

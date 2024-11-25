@@ -21,12 +21,15 @@ public class Playground {
             final Image imageGrass = ImageIO.read(new File("./img/grass.png"));
             final Image imageRock = ImageIO.read(new File("./img/rock.png"));
             final Image imageTrap = ImageIO.read(new File("./img/trap.png"));
+            final Image imageDoor = ImageIO.read(new File("./img/door.png"));
             final int imageTreeWidth = imageTree.getWidth(null);
             final int imageTreeHeight = imageTree.getHeight(null);
             final int imageGrassWidth = imageGrass.getWidth(null);
             final int imageGrassHeight = imageGrass.getHeight(null);
             final int imageRockWidth = imageRock.getWidth(null);
             final int imageRockHeight = imageRock.getHeight(null);
+            final int imageDoorWidth = imageRock.getWidth(null);
+            final int imageDoorHeight = imageRock.getHeight(null);
             BufferedReader bufferedReader = new BufferedReader(new FileReader(pathName));
             String line=bufferedReader.readLine();
             int lineNumber = 0;
@@ -43,6 +46,10 @@ public class Playground {
                         case 'R' : environment.add(new SolidSprite(imageRock, columnNumber*imageRockWidth,
                                 lineNumber*imageRockHeight, imageRockWidth, imageRockHeight));
                             break;
+                        case 'D': environment.add(new InteractiveSprite(imageDoor, columnNumber*imageDoorWidth,
+                                lineNumber*imageDoorHeight, imageDoorWidth, imageDoorHeight,"door"));
+                            break;
+
                     }
                     columnNumber++;
                 }
@@ -63,6 +70,13 @@ public class Playground {
             if (sprite instanceof SolidSprite) solidSpriteArrayList.add(sprite);
         }
         return solidSpriteArrayList;
+    }
+    public ArrayList<Sprite> getInteractiveSpriteList(){
+        ArrayList <Sprite> interactiveSpriteArrayList = new ArrayList<>();
+        for (Sprite sprite : environment){
+            if (sprite instanceof InteractiveSprite) interactiveSpriteArrayList.add(sprite);
+        }
+        return interactiveSpriteArrayList;
     }
     public ArrayList<Displayable> getSpriteList(){
         ArrayList <Displayable> displayableArrayList = new ArrayList<>();
