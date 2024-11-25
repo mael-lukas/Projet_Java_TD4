@@ -11,11 +11,13 @@ public class Playground {
     private String mapPathName;
     public int maxMapCol;
     public int maxMapRow;
+    Camera camera;
 
-    public Playground (String pathName, int maxMapCol, int maxMapRow){
+    public Playground (String pathName, int maxMapCol, int maxMapRow, Camera camera){
         this.mapPathName = pathName;
         this.maxMapCol = maxMapCol;
         this.maxMapRow = maxMapRow;
+        this.camera = camera;
         try{
             final Image imageTree = ImageIO.read(new File("./img/tree.png"));
             final Image imageGrass = ImageIO.read(new File("./img/grass.png"));
@@ -38,16 +40,16 @@ public class Playground {
                 for (byte element : line.getBytes(StandardCharsets.UTF_8)){
                     switch (element){
                         case 'T' : environment.add(new SolidSprite(imageTree, columnNumber*imageTreeWidth,
-                                lineNumber*imageTreeHeight, imageTreeWidth, imageTreeHeight));
+                                lineNumber*imageTreeHeight, imageTreeWidth, imageTreeHeight,camera));
                             break;
                         case ' ' : environment.add(new Sprite(imageGrass,columnNumber*imageGrassWidth,
-                                lineNumber*imageGrassHeight, imageGrassWidth, imageGrassHeight));
+                                lineNumber*imageGrassHeight, imageGrassWidth, imageGrassHeight,camera));
                             break;
                         case 'R' : environment.add(new SolidSprite(imageRock, columnNumber*imageRockWidth,
-                                lineNumber*imageRockHeight, imageRockWidth, imageRockHeight));
+                                lineNumber*imageRockHeight, imageRockWidth, imageRockHeight,camera));
                             break;
                         case 'D': environment.add(new InteractiveSprite(imageDoor, columnNumber*imageDoorWidth,
-                                lineNumber*imageDoorHeight, imageDoorWidth, imageDoorHeight,"door"));
+                                lineNumber*imageDoorHeight, imageDoorWidth, imageDoorHeight,camera,"door"));
                             break;
 
                     }
@@ -78,11 +80,11 @@ public class Playground {
         }
         return interactiveSpriteArrayList;
     }
-    public ArrayList<Displayable> getSpriteList(){
-        ArrayList <Displayable> displayableArrayList = new ArrayList<>();
+    public ArrayList<Sprite> getSpriteList(){
+        ArrayList<Sprite> spriteArrayList = new ArrayList<>();
         for (Sprite sprite : environment){
-            displayableArrayList.add((Displayable) sprite);
+            spriteArrayList.add( sprite);
         }
-        return displayableArrayList;
+        return spriteArrayList;
     }
 }

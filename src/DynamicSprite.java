@@ -13,8 +13,8 @@ public class DynamicSprite extends SolidSprite {
     private int hitboxYOffset = 0;
     GameEngine ge;
 
-    public DynamicSprite(Image image, double x, double y, double width, double height,GameEngine ge) {
-        super(image, x, y, width, height);
+    public DynamicSprite(Image image, double x, double y, double width, double height, Camera camera, GameEngine ge) {
+        super(image, x, y, width, height, camera);
         this.direction = "south";
         this.ge = ge;
         this.hitbox = new Rectangle2D.Double(this.x, this.y, this.width, this.height);

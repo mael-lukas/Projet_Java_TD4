@@ -4,8 +4,8 @@ import java.awt.geom.Rectangle2D;
 public class InteractiveSprite extends Sprite {
     private String name;
 
-    public InteractiveSprite(Image image, double x, double y, double width, double height, String name) {
-        super(image, x, y, width, height);
+    public InteractiveSprite(Image image, double x, double y, double width, double height, Camera camera, String name) {
+        super(image, x, y, width, height, camera);
         this.name = name;
     }
 

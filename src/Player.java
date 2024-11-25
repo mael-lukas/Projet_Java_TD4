@@ -3,7 +3,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class Player extends DynamicSprite {
-    public int speed = 3;
+    public int speed = 5;
     private final int spriteSheetNumberOfColumn = 10;
     public String direction;
     private int spriteCounter = 0;
@@ -13,13 +13,14 @@ public class Player extends DynamicSprite {
     private int hitboxYOffset = 0;
     PlaygroundManager pgManager;
 
-    public Player(Image image, double x, double y, double width, double height, GameEngine ge, PlaygroundManager pgManager) {
-        super(image, x, y, width, height, ge);
+    public Player(Image image, double x, double y, double width, double height, Camera camera, GameEngine ge, PlaygroundManager pgManager) {
+        super(image, x, y, width, height, camera, ge);
         this.direction = "south";
         this.ge = ge;
         this.pgManager = pgManager;
         this.hitbox = new Rectangle2D.Double(this.x, this.y, this.width, this.height);
         setHitbox(10,18,27,28);
+        camera.setCameraXandY(this.x,this.y);
     }
 
     public void setHitbox(int xOffset,int yOffset,int width,int height) {
@@ -82,7 +83,7 @@ public class Player extends DynamicSprite {
                 String name = ((InteractiveSprite)sprite).getName();
                 switch(name) {
                     case "door":
-                        this.pgManager.setCurrentPlayground((this.pgManager.currentPlayground + 1)%2);
+                        pgManager.setCurrentPlayground((pgManager.currentPlayground + 1)%2);
                         break;
                 }
             }
@@ -123,6 +124,7 @@ public class Player extends DynamicSprite {
                     break;
             }
         }
+        camera.setCameraXandY(this.x, this.y);
     }
 
     @Override
@@ -172,6 +174,6 @@ public class Player extends DynamicSprite {
         int srcy1 = (int)(attitude * this.height);
         int srcx2 = (int)((spriteNumber + 1) * this.width);
         int srcy2 = (int)((attitude + 1) * this.height);
-        g.drawImage(image, (int)this.x, (int)this.y, (int)(this.x+this.width), (int)(this.y+this.height), srcx1, srcy1, srcx2, srcy2, null);
+        g.drawImage(image, (int)camera.centerX, (int)camera.centerY, (int)(camera.centerX+this.width), (int)(camera.centerY+this.height), srcx1, srcy1, srcx2, srcy2, null);
     }
 }

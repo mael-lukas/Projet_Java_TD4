@@ -4,30 +4,21 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class RenderEngine extends JPanel implements Engine {
-    //private LinkedList<Displayable> renderList;
     PlaygroundManager pgManager;
-    private ArrayList<ArrayList<Displayable>> rendersList;
+    private ArrayList<ArrayList<Sprite>> rendersList;
 
     public RenderEngine(PlaygroundManager pgManager) {
-       // renderList = new LinkedList<Displayable>();
-        this.rendersList = new ArrayList<ArrayList<Displayable>>();
+        this.rendersList = new ArrayList<ArrayList<Sprite>>();
         this.pgManager = pgManager;
         for (Playground pg : (pgManager.playgroundList)){
             rendersList.add(pg.getSpriteList());
         }
     }
 
-//    public void addToRenderList(ArrayList<Displayable> displayable){
-//        if (!renderList.contains(displayable)){
-//            renderList.addAll(displayable);
-//        }
-//    }
-
-    public void addToRenderList(Displayable displayable, int renderedMapIndex) {
-        ArrayList<Displayable> renderedMap = rendersList.get(renderedMapIndex);
-        renderedMap.add(displayable);
+    public void addToRenderList(Sprite sprite, int renderedMapIndex) {
+        ArrayList<Sprite> renderedMap = rendersList.get(renderedMapIndex);
+        renderedMap.add(sprite);
         rendersList.set(renderedMapIndex, renderedMap);
-        //rendersList.add(displayable);
     }
 
     @Override
@@ -37,9 +28,9 @@ public class RenderEngine extends JPanel implements Engine {
 
     @Override
     public void paint(Graphics g) {
-        ArrayList<Displayable> renderedMap = rendersList.get(pgManager.currentPlayground);
-        for(Displayable displayable : renderedMap) {
-            displayable.draw(g);
+        ArrayList<Sprite> renderedMap = rendersList.get(pgManager.currentPlayground);
+        for(Sprite sprite : renderedMap) {
+            sprite.draw(g);
         }
         g.dispose();
     }

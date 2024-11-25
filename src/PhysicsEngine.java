@@ -19,10 +19,6 @@ public class PhysicsEngine implements Engine {
         movingSpriteList.add(dynamicSprite);
     }
 
-//    public void setEnvironment(ArrayList<Sprite> environment) {
-//        this.environment = environment;
-//    }
-
     @Override
     public void update() {
         for(DynamicSprite dynamicSprite : movingSpriteList) {

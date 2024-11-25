@@ -1,12 +1,3 @@
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
-import java.io.File;
-import java.security.Key;
-import java.util.ArrayList;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
 public class Main {
 
     public Main() throws Exception {
@@ -49,6 +40,6 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-        MainGame main = new MainGame();
+        GamePanel main = new GamePanel();
     }
 }

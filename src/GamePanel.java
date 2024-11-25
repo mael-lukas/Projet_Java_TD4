@@ -6,25 +6,21 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class MainGame {
-    RenderEngine renderEngine;
-    GameEngine gameEngine;
-    PhysicsEngine physicEngine;
+public class GamePanel {
     int fps = 60;
+    Camera camera = new Camera(0,0);
+    PlaygroundManager pgManager = new PlaygroundManager(camera);
+    GameEngine gameEngine = new GameEngine();
+    Player hero = new Player(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),31*64, 28*64,  48, 50,camera,gameEngine,pgManager);
+    RenderEngine renderEngine = new RenderEngine(pgManager);
+    PhysicsEngine physicEngine = new PhysicsEngine(pgManager);
 
-    public MainGame() throws IOException {
+    public GamePanel() throws IOException {
         // Créer la JFrame
         JFrame frame = new JFrame("Jeu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1920, 1080);
         frame.setLocationRelativeTo(null); //met l'écran au milieu
-
-        //on gère les Engines + le héro
-        PlaygroundManager pgManager = new PlaygroundManager();
-        gameEngine = new GameEngine();
-        Player hero = new Player(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),200, 300,  48, 50,gameEngine,pgManager);
-        renderEngine = new RenderEngine(pgManager);
-        physicEngine = new PhysicsEngine(pgManager);
 
         int delay = 1000/fps;
         Timer renderTimer = new Timer(delay, (time) -> renderEngine.update());
