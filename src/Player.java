@@ -3,7 +3,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class Player extends DynamicSprite {
-    public int speed = 4;
+    public int speed = 3;
     private final int spriteSheetNumberOfColumn = 10;
     public String direction;
     private int spriteCounter = 0;
@@ -94,16 +94,16 @@ public class Player extends DynamicSprite {
         if (ge.running == true) {
             switch(direction) {
                 case "north":
-                    this.y -= speed + 1;
+                    this.y -= (speed + 2);
                     break;
                 case "south":
-                    this.y += speed + 1;
+                    this.y += (speed + 2);
                     break;
                 case "east":
-                    this.x += speed + 1;
+                    this.x += (speed + 2);
                     break;
                 case "west":
-                    this.x -= speed + 1;
+                    this.x -= (speed + 2);
                     break;
             }
         }
