@@ -24,6 +24,9 @@ public class Playground {
             final Image imageRock = ImageIO.read(new File("./img/rock.png"));
             final Image imageTrap = ImageIO.read(new File("./img/trap.png"));
             final Image imageDoor = ImageIO.read(new File("./img/door.png"));
+            final Image imageLadder1 = ImageIO.read(new File("./img/ladder1.png"));
+            final Image imageFloor = ImageIO.read(new File("./img/dungeon_floor.png"));
+            final Image imageWall = ImageIO.read(new File("./img/dungeon_wall.png"));
             final int imageTreeWidth = imageTree.getWidth(null);
             final int imageTreeHeight = imageTree.getHeight(null);
             final int imageGrassWidth = imageGrass.getWidth(null);
@@ -32,6 +35,12 @@ public class Playground {
             final int imageRockHeight = imageRock.getHeight(null);
             final int imageDoorWidth = imageRock.getWidth(null);
             final int imageDoorHeight = imageRock.getHeight(null);
+            final int imageLadder1Width = imageLadder1.getWidth(null);
+            final int imageLadder1Height = imageLadder1.getHeight(null);
+            final int imageFloorWidth = imageFloor.getWidth(null);
+            final int imageFloorHeight = imageFloor.getHeight(null);
+            final int imageWallWidth = imageWall.getWidth(null);
+            final int imageWallHeight = imageWall.getHeight(null);
             BufferedReader bufferedReader = new BufferedReader(new FileReader(pathName));
             String line=bufferedReader.readLine();
             int lineNumber = 0;
@@ -51,11 +60,19 @@ public class Playground {
                         case 'D': environment.add(new InteractiveSprite(imageDoor, columnNumber*imageDoorWidth,
                                 lineNumber*imageDoorHeight, imageDoorWidth, imageDoorHeight,camera,"door"));
                             break;
-
+                        case 'L': environment.add(new InteractiveSprite(imageLadder1, columnNumber*imageLadder1Width,
+                                lineNumber*imageLadder1Height, imageLadder1Width, imageLadder1Height,camera,"ladder"));
+                            break;
+                        case 'F': environment.add(new Sprite(imageFloor, columnNumber*imageFloorWidth,
+                                lineNumber*imageFloorHeight, imageFloorWidth, imageFloorHeight,camera));
+                                break;
+                        case '0': environment.add(new SolidSprite(imageWall, columnNumber*imageWallWidth,
+                                lineNumber*imageWallHeight, imageWallWidth, imageWallHeight,camera));
+                            break;
                     }
                     columnNumber++;
                 }
-                columnNumber =0;
+                columnNumber = 0;
                 lineNumber++;
                 line=bufferedReader.readLine();
             }

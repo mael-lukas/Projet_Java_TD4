@@ -11,7 +11,7 @@ public class GamePanel {
     Camera camera = new Camera(0,0);
     PlaygroundManager pgManager = new PlaygroundManager(camera);
     GameEngine gameEngine = new GameEngine();
-    Player hero = new Player(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),31*64, 28*64,  48, 50,camera,gameEngine,pgManager);
+    Player hero = new Player(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),31*64,28*64,48, 50,camera,gameEngine,pgManager);
     RenderEngine renderEngine = new RenderEngine(pgManager);
     PhysicsEngine physicEngine = new PhysicsEngine(pgManager);
 
