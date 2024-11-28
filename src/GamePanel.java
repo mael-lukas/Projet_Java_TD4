@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class GamePanel {
-    int fps = 80;
+    int fps = 60;
     Camera camera = new Camera(0,0);
     PlaygroundManager pgManager = new PlaygroundManager(camera);
     GameEngine gameEngine = new GameEngine();

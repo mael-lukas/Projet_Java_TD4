@@ -85,6 +85,35 @@ public class Player extends DynamicSprite {
                     case "door":
                         pgManager.setCurrentPlayground((pgManager.currentPlayground + 1)%2);
                         break;
+                    case "ladder1":
+                        pgManager.setCurrentPlayground(1);
+                        break;
+                    case "ladder2":
+                        //pgManager.setCurrentPlayground(2);
+                        break;
+                    case "lava":
+                        switch(direction) {
+                            case "north":
+                                for (int i = 0; i < 12; i++) {
+                                    this.y += 5;
+                                }
+                                break;
+                            case "south":
+                                for (int i = 0; i < 12; i++) {
+                                    this.y -= 5;
+                                }
+                                break;
+                            case "east":
+                                for (int i = 0; i < 12; i++) {
+                                    this.x -= 5;
+                                }
+                                break;
+                            case "west":
+                                for (int i = 0; i < 12; i++) {
+                                    this.x += 5;
+                                }
+                                break;
+                        }
                 }
             }
         }
