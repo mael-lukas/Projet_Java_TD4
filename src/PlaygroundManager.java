@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class PlaygroundManager {
     public ArrayList<Playground> playgroundList;
     private int maxPlayground = 10;
-    public int currentPlayground = 2;
+    public int currentPlayground = 0;
     Camera camera;
 
     public PlaygroundManager(Camera camera) {

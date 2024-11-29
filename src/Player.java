@@ -12,6 +12,7 @@ public class Player extends DynamicSprite {
     private int hitboxXOffset = 0;
     private int hitboxYOffset = 0;
     PlaygroundManager pgManager;
+    private int life = 4;
 
     public Player(Image image, double x, double y, double width, double height, Camera camera, GameEngine ge, PlaygroundManager pgManager) {
         super(image, x, y, width, height, camera, ge);
@@ -89,7 +90,7 @@ public class Player extends DynamicSprite {
                         pgManager.setCurrentPlayground(1);
                         break;
                     case "ladder2":
-                        //pgManager.setCurrentPlayground(2);
+                        pgManager.setCurrentPlayground(2);
                         break;
                     case "lava":
                         switch(direction) {
@@ -114,6 +115,7 @@ public class Player extends DynamicSprite {
                                 }
                                 break;
                         }
+                        this.life--;
                 }
             }
         }
@@ -181,6 +183,10 @@ public class Player extends DynamicSprite {
                 spriteCounter = 0;
             }
         }
+    }
+
+    public int getLife() {
+        return this.life;
     }
     @Override
     public void draw(Graphics g) {

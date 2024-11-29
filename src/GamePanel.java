@@ -8,11 +8,10 @@ import java.io.IOException;
 
 public class GamePanel {
     int fps = 60;
-    int lifechange = 3;
     Camera camera = new Camera(0,0);
     PlaygroundManager pgManager = new PlaygroundManager(camera);
     GameEngine gameEngine = new GameEngine();
-    Player hero = new Player(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),25*64,9*64,48, 50,camera,gameEngine,pgManager);
+    Player hero = new Player(ImageIO.read(new File("./img/heroTileSheetLowRes.png")),31*64,28*64,48, 50,camera,gameEngine,pgManager);
     RenderEngine renderEngine = new RenderEngine(pgManager);
     PhysicsEngine physicEngine = new PhysicsEngine(pgManager);
 
@@ -79,7 +78,7 @@ public class GamePanel {
 
         layers.add(renderEngine, JLayeredPane.DEFAULT_LAYER);
 
-        switch (lifechange){
+        switch (hero.getLife()){
             case 4 :
                 layers.add(fulllife, JLayeredPane.PALETTE_LAYER);
                 break;
