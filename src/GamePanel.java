@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class GamePanel {
     int fps = 60;
+    int lifechange = 3;
     Camera camera = new Camera(0,0);
     PlaygroundManager pgManager = new PlaygroundManager(camera);
     GameEngine gameEngine = new GameEngine();
@@ -48,21 +49,59 @@ public class GamePanel {
 
         // Créer le deuxième écran (Écran de jeu)
         JPanel gameScreen = new JPanel();
+
+        JLabel fulllife = new JLabel();
+        fulllife.setIcon(new ImageIcon("./img/fulllife.png"));
+        fulllife.setOpaque(false);
+
+        JLabel threequarterlife = new JLabel();
+        threequarterlife.setIcon(new ImageIcon("./img/3life.png"));
+        threequarterlife.setOpaque(false);
+
+        JLabel midlife = new JLabel();
+        midlife.setIcon(new ImageIcon("./img/midlife.png"));
+        midlife.setOpaque(false);
+
+        JLabel onequarterlife = new JLabel();
+        onequarterlife.setIcon(new ImageIcon("./img/1life.png"));
+        onequarterlife.setOpaque(false);
+
+
+
+        JLayeredPane layers = new JLayeredPane();
+        layers.setPreferredSize(new Dimension(1920, 1080));
+
+        renderEngine.setBounds(0, 0, 1920, 1080);
+        fulllife.setBounds(50, 20, 200, 20);
+        threequarterlife.setBounds(50, 20, 200, 20);
+        midlife.setBounds(50, 20, 200, 20);
+        onequarterlife.setBounds(50, 20, 200, 20);
+
+        layers.add(renderEngine, JLayeredPane.DEFAULT_LAYER);
+
+        switch (lifechange){
+            case 4 :
+                layers.add(fulllife, JLayeredPane.PALETTE_LAYER);
+                break;
+            case 3 :
+                layers.add(threequarterlife, JLayeredPane.PALETTE_LAYER);
+                break;
+            case 2 :
+                layers.add(midlife, JLayeredPane.PALETTE_LAYER);
+                break;
+            case 1 :
+                layers.add(onequarterlife, JLayeredPane.PALETTE_LAYER);
+                break;
+        }
+
         gameScreen.setLayout(new BorderLayout());
-        gameScreen.add(renderEngine, BorderLayout.CENTER);
+        gameScreen.add(layers, BorderLayout.CENTER);
 
-        gameScreen.add(renderEngine);
-
-        //Playground level = new Playground("./data/level1.txt");
-        //renderEngine.addToRenderList(level.getSpriteList());
-        //renderEngine.addToRenderList(hero);
 
         for (int i = 0; i < pgManager.playgroundList.size(); i++) {
             renderEngine.addToRenderList(hero,i);
         }
         physicEngine.addToMovingSpriteList(hero);
-        //physicEngine.setEnvironment(level.getSolidSpriteList());
-
         // Ajouter une barre de vie simulée
         /*
         JPanel lifePanel = new JPanel();
